@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+server:
+    port: 8001
+---
+spring:
+  profiles: uat
+server:
+    port: 8002
