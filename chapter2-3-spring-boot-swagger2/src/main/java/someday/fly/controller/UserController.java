@@ -2,9 +2,7 @@ package someday.fly.controller;
 
 
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 import someday.fly.domain.User;
 
@@ -16,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
-
+    private static final String SUCCESS = "success";
     static Map<Long, User> users = new HashMap<Long, User>();
 
     @ApiOperation(value = "获取用户列表")
@@ -36,7 +34,7 @@ public class UserController {
     @ApiImplicitParam(name = "user", value = "用户详细信息实体", required = true, dataType = "User")
     public String saveUser(@RequestBody User user) {
         users.put(user.getId(), user);
-        return "success";
+        return SUCCESS;
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
@@ -48,7 +46,7 @@ public class UserController {
         User user1 = users.get(id);
         user1.setName(user.getName());
         user1.setAge(user.getAge());
-        return "success";
+        return SUCCESS;
     }
 
 
@@ -58,6 +56,6 @@ public class UserController {
             @PathVariable long id
     ) {
         users.remove(id);
-        return "success";
+        return SUCCESS;
     }
 }

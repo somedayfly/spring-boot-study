@@ -12,6 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+    private static final String SUCCESS = "success";
 
     static Map<Long, User> users = new  HashMap<Long, User>();
 
@@ -28,7 +29,7 @@ public class UserController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String saveUser(@ModelAttribute User user){
         users.put(user.getId(), user);
-        return "success";
+        return SUCCESS;
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
@@ -38,7 +39,7 @@ public class UserController {
         User user1 = users.get(id);
         user1.setName(user.getName());
         user1.setAge(user.getAge());
-        return "success";
+        return SUCCESS;
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
@@ -46,6 +47,6 @@ public class UserController {
             @PathVariable long id
     ){
          users.remove(id);
-         return "success";
+         return SUCCESS;
     }
 }
